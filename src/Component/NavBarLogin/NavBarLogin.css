@@ -1,0 +1,30 @@
+.navLogin{
+  display: flex;
+  justify-content: space-around;
+  /* margin-top: 1.2em; */
+  height: 8vh;
+  background-color: rgb(244, 239, 230);
+  position: fixed;
+  width: 100%;
+  
+}
+
+.navLogin__logo{
+  width: 50%;
+  height: 100%;
+}
+
+.navLogin__logo img{
+  width: 100%;
+  height: 100%;
+
+}
+
+.navLogin__title{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding-left: 13em;
+}
+

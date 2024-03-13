@@ -1,0 +1,66 @@
+.containerEmployer{
+  display: flex;
+}
+
+.containerEmployer__read {
+
+  display: flex;
+  margin:0 auto;
+  flex-direction: column;
+}
+
+.employeeList__item{
+  list-style: none;
+  margin: 1.3em 0;
+  border-bottom:2px solid rgba(102, 51, 153, 0.5) ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.employeeList__item i{
+  font-size: 1.7em;
+  cursor: pointer;
+ 
+}
+
+.employeeList__item i:hover{
+  color: rgb(120, 190, 222);
+}
+
+.addAndSearch{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.btnAdd{
+  margin: 6em;
+  display: flex;
+  align-items: center;
+  
+}
+.btnAdd-link{
+  color: white;
+  text-decoration: none;
+}
+
+.btnAdd i{
+  padding-left:.5em ;
+}
+
+.employeeList{
+  margin-top: 3em;
+  font-size: 1.2em;
+}
+
+.bxs-show{
+  color: black;
+}
+
+.bx-x{
+  margin-left: .5em;
+  color: red;
+}
+

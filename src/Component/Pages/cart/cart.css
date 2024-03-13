@@ -1,0 +1,56 @@
+.container-cart__count{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+}
+
+
+.btnRemove{
+  font-size: 2em;
+  cursor: pointer;
+  border: none;
+  border: 1px solid red;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.cardinfo{
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.allPrice{
+  position: absolute;
+  bottom:50px;
+  font-weight: 900;
+  /* border: 1px solid blue; */
+}
+
+.btnConfirm{
+  position: absolute;
+  bottom: -2em;
+}
+
+@media (min-width:768px) {
+  .container-cart__count{
+    flex-direction: row;
+    /* border: 1px solid red; */
+  }
+
+  .allPrice{
+    bottom:100px;
+    font-size: 1.5em;
+  }
+
+  .btnConfirm{
+    position: absolute;
+    bottom: 100px;
+    right: 10em;
+  }
+}

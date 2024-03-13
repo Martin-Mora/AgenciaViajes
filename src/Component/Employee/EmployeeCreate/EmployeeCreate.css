@@ -1,0 +1,83 @@
+.containerEmployer{
+  display: flex;
+  
+}
+
+
+
+.containerEmployer__create--img{
+  width: 200px;
+  height: 200px;
+  position: relative;
+  right: 10em;
+  
+}
+
+.employer__create{
+  position: relative;
+  right: 5em;
+  top:7em
+}
+
+.backEmployee{
+  text-align: end;
+  position: absolute;
+  right: 10em;
+  top: 6em;
+  background-color: rgb(244, 239, 230);
+  color: black;
+}
+
+.backEmployee i{
+  font-size: 2em;
+}
+
+.containerEmployer__create--img img{
+  width: 100%;
+  height: 100%;
+}
+
+.containerEmployer__create {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+
+
+
+label {
+  margin-right: 10px;
+  position: relative;
+}
+
+.btnForm button{
+  width: 30%;
+}
+
+.btnForm{
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-around;
+  
+}
+
+.empty{
+  background-color: red;
+}
+
+.empty:hover{
+  background-color: rgba(255, 0, 0, 0.752);
+}
+
+.save:hover{
+  opacity: 0.752;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
