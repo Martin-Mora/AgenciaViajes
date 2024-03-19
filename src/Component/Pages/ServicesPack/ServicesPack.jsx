@@ -29,6 +29,15 @@ const ServicesPack = () => {
     <div className="container-service">
       <Navbar />
 
+      <div className="addAndSearch">
+        <button className="btnAdd">
+          <Link to="/servicesAdd" className="btnAdd-link">
+            Agregar un servicio
+          </Link>
+          <i className='bx bxs-dish'></i>
+        </button>
+      </div>
+
       <section className="containerService__pack">
       {servicios.map((service, index) => (
         <div key={index} className="containerService__pack--card">

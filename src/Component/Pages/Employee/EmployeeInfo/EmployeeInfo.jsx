@@ -1,14 +1,14 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import clientImg from "../../../Img/client.svg";
-import "../../Employee/EmployeeInfo/EmployeeInfo.css";
-import "../../Employee/EmployeeCreate/EmployeeCreate.css";
+import Navbar from "../../../Navbar/Navbar.jsx";
+import employee2 from "../../../../Img/Employee.svg";
+import "../EmployeeInfo/EmployeeInfo.css";
+import "../EmployeeCreate/EmployeeCreate.css";
 import Swal from 'sweetalert2';
-import Navbar from "../../Navbar/Navbar";
 
-const EmployeeClientInfo = () => {
+const EmployeeInfo = () => {
   const { id } = useParams();
-  const [client, setClient] = useState({});
+  const [employee, setEmployee] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
@@ -16,16 +16,14 @@ const EmployeeClientInfo = () => {
   useEffect(() => {
     async function fetchEmployee() {
       try {
-        const response = await fetch(`http://149.50.138.150:9090/api/clientes/${id}`);
+        const response = await fetch(`http://149.50.138.150:9090/api/empleados/${id}`);
         const data = await response.json();
-        console.log(data.cliente);
-        setClient(data.cliente);
+        console.log(data);
+        setEmployee(data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching employee data:", error);
-      }
-      finally {
-        setLoading(false); // Establecer loading en false independientemente de si hay un error o no
+        setLoading(false);
       }
     }
 
@@ -34,23 +32,20 @@ const EmployeeClientInfo = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
-    
-    setClient({
-      ...client,
+    setEmployee({
+      ...employee,
       [name]: value
     });
   };
 
   const handleEdit = async () => {
     try {
-      const response = await fetch(`http://149.50.138.150:9090/api/clientes/${id}`, {
+      const response = await fetch(`http://149.50.138.150:9090/api/empleados/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(client),
-        
+        body: JSON.stringify(employee)
       });
       if (response.ok) {
         // Redirigir a la página de visualización del empleado después de la edición
@@ -74,47 +69,54 @@ const EmployeeClientInfo = () => {
     <div className="containerEmployer">
       <Navbar />
 
-      <Link to="/clientRead" className="backEmployee"><i className='bx bx-arrow-to-left' ></i></Link> 
+      <Link to="/employeeRead" className="backEmployee"><i className='bx bx-arrow-to-left' ></i></Link> 
 
       <div className="containerEmployer__create">
         <div className="containerEmployer__create--img">
-          <img src={clientImg} alt="" />
+          <img src={employee2} alt="" />
         </div>
 
         <div className="employer__create">
           <div>
             <label>Nombre:</label>
-            <input type="text" id="nombre" name="nombre" value={loading ? "" : client.cliente?.nombre } onChange={handleInputChange} />
+            <input type="text" id="nombre" name="nombre" value={loading ? "" : employee?.nombre} onChange={handleInputChange} />
           </div>
           <div>
             <label>Apellido:</label>
-            <input type="text" id="apellido" name="apellido" value={loading ? "" : client?.apellido} onChange={handleInputChange} />
+            <input type="text" id="apellido" name="apellido" value={loading ? "" : employee?.apellido} onChange={handleInputChange} />
           </div>
           <div>
             <label>Dni:</label>
-            <input type="text" id="dni" name="dni" value={loading ? "" : client?.dni} onChange={handleInputChange} />
+            <input type="text" id="dni" name="dni" value={loading ? "" : employee?.dni} onChange={handleInputChange} />
           </div>
           <div>
             <label>Direccion:</label>
-            <input type="text" id="direccion" name="direccion" value={loading ? "" : client?.direccion} onChange={handleInputChange} />
+            <input type="text" id="direccion" name="direccion" value={loading ? "" : employee?.direccion} onChange={handleInputChange} />
           </div>
           <div>
             <label>Fecha nacimiento:</label>
-            <input type="text" id="fechaNac" name="fechaNac" value={loading ? "" : client?.fechaNac} onChange={handleInputChange} />
+            <input type="text" id="fechaNacimiento" name="fechaNacimiento" value={loading ? "" : employee?.fechaNac} onChange={handleInputChange} />
           </div>
           <div>
             <label>Nacionalidad:</label>
-            <input type="text" id="nacionalidad" name="nacionalidad" value={loading ? "" : client?.nacionalidad} onChange={handleInputChange} />
+            <input type="text" id="nacionalidad" name="nacionalidad" value={loading ? "" : employee?.nacionalidad} onChange={handleInputChange} />
           </div>
           <div>
             <label>Celular:</label>
-            <input type="text" id="celular" name="celular" value={loading ? "" : client?.celular} onChange={handleInputChange} />
+            <input type="text" id="celular" name="celular" value={loading ? "" : employee?.celular} onChange={handleInputChange} />
           </div>
           <div>
             <label>Email:</label>
-            <input type="text" id="email" name="email" value={loading ? "" : client?.email} onChange={handleInputChange} />
+            <input type="text" id="email" name="email" value={loading ? "" : employee?.email} onChange={handleInputChange} />
           </div>
-         
+          <div>
+            <label>Sueldo:</label>
+            <input type="text" id="sueldo" name="sueldo" value={loading ? "" : employee?.sueldo} onChange={handleInputChange} />
+          </div>
+          <div>
+            <label>Cargo:</label>
+            <input type="text" id="cargo" name="cargo" value={loading ? "" : employee?.cargo} onChange={handleInputChange} />
+          </div>
 
           <div className="btnForm">
             <button type="submit" onClick={handleEdit} className="save">Editar</button>
@@ -125,4 +127,4 @@ const EmployeeClientInfo = () => {
   );
 };
 
-export default EmployeeClientInfo
+export default EmployeeInfo;

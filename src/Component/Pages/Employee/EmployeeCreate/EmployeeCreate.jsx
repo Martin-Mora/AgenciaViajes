@@ -1,6 +1,6 @@
-import Navbar from "../../Navbar/Navbar.jsx";
+import Navbar from "../../../Navbar/Navbar.jsx";
 import "../EmployeeCreate/EmployeeCreate.css";
-import employee from "../../../Img/Employee.svg";
+import employee from "../../../../Img/Employee.svg";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';

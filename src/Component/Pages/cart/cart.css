@@ -8,6 +8,22 @@
   margin: auto;
 }
 
+.cartInfo{
+  width: 500px;
+  height: 200px;
+}
+
+.cartInfo img {
+  width: 100%;
+  height: 100%;
+}
+
+.cartInfo__description{
+  color: black;
+  font-weight: 900;
+  font-size: 1.5em;
+  text-align: center;
+}
 
 .btnRemove{
   font-size: 2em;
@@ -30,6 +46,28 @@
   bottom:50px;
   font-weight: 900;
   /* border: 1px solid blue; */
+}
+
+.allPriceItems{
+  display: flex;
+  align-items: center;
+}
+
+.totalCartPrice{
+  color: rgb(22, 22, 194);
+}
+
+.empty{
+  padding-left: .5em;
+  cursor: pointer;
+  font-size: 2em;
+  background-color: transparent;
+  border: none;
+}
+
+.empty:hover{
+  background-color: transparent;
+  border: none;
 }
 
 .btnConfirm{

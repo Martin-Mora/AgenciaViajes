@@ -5,9 +5,13 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 80%;
-  /* border: 1px solid red; */
   margin: auto;
-  
+  /* border: 1px solid red; */
+}
+
+.addAndSearch{
+  height: 20vh;
+ padding-left: 2em;
 }
 
 .containerService__pack--card{
@@ -25,13 +29,10 @@
 
 .cardImg{
   width: 150px;
-  /* height: 200px; */
+
 }
 
-/* .containerService--img{
-  width: 100%;
-  
-} */
+
 
 .containerService--img img{
   width: 100%;
@@ -63,10 +64,5 @@
     
   }
 
-  .containerService__pack--card{
-    /* border: 1px solid blue; */
-    
-    margin-top: 7em;
-    
-  }
+
 }

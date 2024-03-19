@@ -1,0 +1,12 @@
+.btnPayment{
+   color: rgb(32, 174, 32);
+   margin-left: 2em;
+}
+
+
+.containerEmployer__read{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

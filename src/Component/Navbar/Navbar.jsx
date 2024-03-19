@@ -15,6 +15,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  console.log(user)
+
   const [darkMode, setDarkMode] = useState(true);
 
   const toggleMode = () => {

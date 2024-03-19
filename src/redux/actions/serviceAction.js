@@ -17,3 +17,5 @@ export const removeFromCart = (itemId) => {
     payload: itemId
   };
 };
+
+export const empty_cart = createAction("emptyCart");

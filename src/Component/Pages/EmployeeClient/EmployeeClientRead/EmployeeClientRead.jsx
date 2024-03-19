@@ -1,11 +1,13 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../../Navbar/Navbar";
-import "../EmployeeRead/EmployeeRead.css";
+import NavBar from "../../../Navbar/Navbar.jsx"
+import "../../Employee/EmployeeRead/EmployeeRead.css";
+import "../EmployeeClientRead/EmployeeClientRead.css"
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from "react-redux";
-import { employee_render, delete_employee } from "../../../redux/actions/employeeAction.js";
+import { client_render, delete_client } from "../../../../redux/actions/clientAction.js";
+
 
 const EmployeeRead = () => {
   const dispatch = useDispatch();
@@ -14,7 +16,7 @@ const EmployeeRead = () => {
   console.log(searchInput);
   // Dispatch de la acción para obtener empleados al montar el componente
   useEffect(() => {
-    dispatch(employee_render());
+    dispatch(client_render());
     
   }, [dispatch]);
 
@@ -25,20 +27,21 @@ const EmployeeRead = () => {
   
       
   // Obtener el estado de los empleados desde el store
-  const allEmployee = useSelector((store) => store.employee.allEmployee || []);
+  const allClients = useSelector((store) => store.client.allClient || []);
+  console.log(allClients);
 
   // console.log(typeof allEmployee[0].sueldo);
 
     // Filtrar empleados basado en el criterio de búsqueda
-    const filteredEmployees = searchInput.length > 0 ? allEmployee.filter((employee) =>
-    employee.nombre.toLowerCase().includes(searchInput.toLowerCase()) ||
-    employee.apellido.toLowerCase().includes(searchInput.toLowerCase())
-) : allEmployee;
+    const filteredClients = searchInput.length > 0 ? allClients.filter((client) =>
+    client.nombre.toLowerCase().includes(searchInput.toLowerCase()) ||
+    client.apellido.toLowerCase().includes(searchInput.toLowerCase())
+) : allClients;
 
   // Eliminar empleado
-  const deleteEmployee = (id) => {
+  const delete_cli = (id,nombre) => {
     Swal.fire({
-      title: "¿Quieres borrar al empleado?",
+      title: `¿Quieres borrar al cliente ${nombre}?` ,
       showDenyButton: true,
       confirmButtonText: "Confirmar",
       denyButtonText: `No quiero`,
@@ -48,17 +51,17 @@ const EmployeeRead = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: "Empleado Eliminado!",
+          title: "Cliente Eliminado!",
           icon:"success",
           customClass: {
             title: 'my-swal-title'
           }
         });
         // Despacha la acción delete_employee con el id del empleado como argumento
-        dispatch(delete_employee(id));
+        dispatch(delete_client(id));
         // Actualiza manualmente el estado de allEmployee para reflejar el empleado eliminado
-        const updatedEmployees = allEmployee.filter(employee => employee.id !== id);
-        dispatch({ type: 'UPDATE_EMPLOYEES', payload: updatedEmployees });
+        const updatedClients = allClients.filter(client => client.id !== id);
+        dispatch({ type: 'UPDATE_EMPLOYEES', payload: updatedClients });
       } else if (result.isDenied) {
         Swal.fire({
           title: "Eliminacion cancelada",
@@ -74,12 +77,12 @@ const EmployeeRead = () => {
 
   return (
     <div className="containerEmployer">
-      <Navbar />
+      <NavBar />
       <div className="containerEmployer__read">
-        <div className="addAndSearch">
+        <div className="addAndSearchClient">
           <button className="btnAdd">
             <Link to="employeeCreate" className="btnAdd-link">
-              Agregar Empleado
+              Agregar Cliente
             </Link>
             <i className='bx bxs-user-plus'></i>
           </button>
@@ -92,20 +95,20 @@ const EmployeeRead = () => {
             onChange={handleInput}
             className="inputSearch"
             type="text"
-            placeholder="Buscar Empleado..."
+            placeholder="Buscar Cliente..."
           />
 
         <div className="employeeList">
           <ul>
-          {filteredEmployees.map((employee) => (
-              <li key={employee.id} className="employeeList__item">
-                {employee.nombre} {employee.apellido} 
+          {filteredClients.map((client) => (
+              <li key={client.id} className="employeeList__item">
+                {client.nombre} {client.apellido} 
                 <div className="btnInfos">
-                  <Link to={`/employeeInfo/${employee.id}`}>
+                  <Link to={`/clientInfo/${client.id}`}>
                     <i className='bx bxs-show'></i>
                   </Link>
                   {/* Botón para eliminar el empleado */}
-                  <i onClick={() => deleteEmployee(employee.id)} className='bx bx-x'></i>
+                  <i onClick={() => delete_cli(client.id, `${client.nombre} ${client.apellido}`)} className='bx bx-x'></i>
                 </div>
               </li>
             ))}

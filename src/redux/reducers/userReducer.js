@@ -33,11 +33,11 @@ export const userReducer = createReducer( initialState, ( builder ) =>
         }
     } )
    
-    .addCase( logOut, (stateActual,action) => {
+    .addCase( logOut, (stateActual,) => {
       return  {
           ...stateActual,
-          user : action.null,
-          token : action.null
+          user : null,
+          token : null
       }
   } )
 

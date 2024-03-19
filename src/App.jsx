@@ -8,16 +8,18 @@ import Login from './Component/Pages/Login/Login.jsx';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { signInToken } from './redux/actions/userAction.js';
-import EmployeeRead from './Component/Employee/EmployeeRead/EmployeeRead.jsx';
-import EmployeCreate from './Component/Employee/EmployeeCreate/EmployeeCreate.jsx';
-import EmployeeInfo from './Component/Employee/EmployeeInfo/EmployeeInfo.jsx';
-import EmployeeClientRead from './Component/EmployeeClient/EmployeeClientRead.jsx';
-import EmployeeClientInfo from './Component/EmployeeClient/EmployeeClientInfo/EmployeeClientInfo.jsx';
+import EmployeeRead from './Component//Pages/Employee/EmployeeRead/EmployeeRead.jsx';
+import EmployeCreate from './Component/Pages/Employee/EmployeeCreate/EmployeeCreate.jsx';
+import EmployeeInfo from './Component/Pages/Employee/EmployeeInfo/EmployeeInfo.jsx';
+import EmployeeClientRead from './Component/Pages/EmployeeClient/EmployeeClientRead/EmployeeClientRead.jsx';
+import EmployeeClientInfo from './Component/Pages/EmployeeClient/EmployeeClientInfo/EmployeeClientInfo.jsx';
 // import ClientService from './Component/ClientService/ClientService.jsx';
 import ServicesPack from './Component/Pages/ServicesPack/ServicesPack.jsx';
 import Cart from './Component/Pages/cart/cart.jsx';
 import ServicePackHotel from './Component/Pages/ServicepackHotel/ServicePackHotel.jsx';
 import ServicePackAuto from './Component/Pages/ServicePackAuto/ServicePackAuto.jsx';
+import Payment from './Component/Pages/Payment/Payment.jsx';
+import ServiceAdd from './Component/Pages/ServiceAdd/ServiceAdd.jsx';
 
 
 
@@ -43,6 +45,11 @@ const router = createBrowserRouter([
       {
         path: "/services",
         element: <ServicesPack />,
+      },
+
+      {
+        path: "/servicesAdd",
+        element: <ServiceAdd />,
       },
 
       {
@@ -84,6 +91,11 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+
+      {
+        path: "/payment",
+        element: <Payment />,
       },
 
       {

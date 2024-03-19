@@ -1,13 +1,19 @@
 .containersCards{
   /* border: 1px solid red; */
-  /* height: 100vh; */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 100%;
   margin: auto;
   
+}
+
+h2{
+  text-align: center;
+  /* border: 1px solid red; */
+  width: 30%;
 }
 
 
@@ -25,6 +31,15 @@
   align-items: center;
 }
 
+.cardImg{
+  width: 200px;
+}
+
+.cardImg img{
+  width: 100%;
+  height: 100%;
+}
+
 
 .cardinfo__item{
   margin: .3em 0;
@@ -40,6 +55,8 @@
   .containersCards{
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
+    padding-left: 5em;
   }
 
   .card{

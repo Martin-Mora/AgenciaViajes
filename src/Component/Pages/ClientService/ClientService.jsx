@@ -1,8 +1,8 @@
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../Navbar/Navbar.jsx";
 import "../ClientService/ClientService.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { service_render } from "../../redux/actions/serviceAction";
+import { service_render } from "../../../redux/actions/serviceAction.js";
 
 const ClientService = () => {
   const dispatch = useDispatch();

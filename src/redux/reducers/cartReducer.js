@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { agregarAlCarrito } from "../actions/serviceAction";
+import { agregarAlCarrito, empty_cart } from "../actions/serviceAction";
 
 const initialState = {
   elements: JSON.parse(localStorage.getItem('carrito')) || []
@@ -21,6 +21,10 @@ const carritoReducer = createReducer(initialState, (builder) => {
     state.elements = state.elements.filter(item => item.id !== action.payload);
     localStorage.setItem("carrito", JSON.stringify(state.elements));
   });
+
+  builder.addCase(empty_cart, (state)=>{
+    state.elements = [];
+  })
 
 });
 

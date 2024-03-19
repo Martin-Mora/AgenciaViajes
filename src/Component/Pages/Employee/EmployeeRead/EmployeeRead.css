@@ -1,15 +1,21 @@
 .containerEmployer{
   display: flex;
+
 }
 
 .containerEmployer__read {
-
+  /* border: 1px solid red; */
   display: flex;
   margin:0 auto;
+  left: 38%;
+  bottom: 10%;
+  position: absolute;
   flex-direction: column;
 }
 
 .employeeList__item{
+  
+  width: 100%;
   list-style: none;
   margin: 1.3em 0;
   border-bottom:2px solid rgba(102, 51, 153, 0.5) ;
@@ -21,6 +27,7 @@
 .employeeList__item i{
   font-size: 1.7em;
   cursor: pointer;
+  
  
 }
 
@@ -32,7 +39,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
+}
 
+
+.inputSearch{
+  width: 70%;
 }
 
 .btnAdd{
@@ -53,6 +65,10 @@
 .employeeList{
   margin-top: 3em;
   font-size: 1.2em;
+}
+
+.btnInfos{
+  padding-left: 2em;
 }
 
 .bxs-show{

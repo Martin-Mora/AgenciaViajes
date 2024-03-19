@@ -1,12 +1,11 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavBar from "../Navbar/Navbar.jsx"
-import "../Employee/EmployeeRead/EmployeeRead.css";
+import Navbar from "../../../Navbar/Navbar";
+import "../EmployeeRead/EmployeeRead.css";
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from "react-redux";
-import { client_render, delete_client } from "../../redux/actions/clientAction";
-
+import { employee_render, delete_employee } from "../../../../redux/actions/employeeAction.js";
 
 const EmployeeRead = () => {
   const dispatch = useDispatch();
@@ -15,7 +14,7 @@ const EmployeeRead = () => {
   console.log(searchInput);
   // Dispatch de la acción para obtener empleados al montar el componente
   useEffect(() => {
-    dispatch(client_render());
+    dispatch(employee_render());
     
   }, [dispatch]);
 
@@ -26,20 +25,20 @@ const EmployeeRead = () => {
   
       
   // Obtener el estado de los empleados desde el store
-  const allClients = useSelector((store) => store.client.allClient || []);
+  const allEmployee = useSelector((store) => store.employee.allEmployee || []);
 
   // console.log(typeof allEmployee[0].sueldo);
 
     // Filtrar empleados basado en el criterio de búsqueda
-    const filteredClients = searchInput.length > 0 ? allClients.filter((client) =>
-    client.nombre.toLowerCase().includes(searchInput.toLowerCase()) ||
-    client.apellido.toLowerCase().includes(searchInput.toLowerCase())
-) : allClients;
+    const filteredEmployees = searchInput.length > 0 ? allEmployee.filter((employee) =>
+    employee.nombre.toLowerCase().includes(searchInput.toLowerCase()) ||
+    employee.apellido.toLowerCase().includes(searchInput.toLowerCase())
+) : allEmployee;
 
   // Eliminar empleado
-  const delete_cli = (id) => {
+  const deleteEmployee = (id,nombre) => {
     Swal.fire({
-      title: "¿Quieres borrar al empleado?",
+      title: `¿Quieres borrar al empleado ${nombre}?`,
       showDenyButton: true,
       confirmButtonText: "Confirmar",
       denyButtonText: `No quiero`,
@@ -56,10 +55,10 @@ const EmployeeRead = () => {
           }
         });
         // Despacha la acción delete_employee con el id del empleado como argumento
-        dispatch(delete_client(id));
+        dispatch(delete_employee(id));
         // Actualiza manualmente el estado de allEmployee para reflejar el empleado eliminado
-        const updatedClients = allClients.filter(client => client.id !== id);
-        dispatch({ type: 'UPDATE_EMPLOYEES', payload: updatedClients });
+        const updatedEmployees = allEmployee.filter(employee => employee.id !== id);
+        dispatch({ type: 'UPDATE_EMPLOYEES', payload: updatedEmployees });
       } else if (result.isDenied) {
         Swal.fire({
           title: "Eliminacion cancelada",
@@ -75,12 +74,12 @@ const EmployeeRead = () => {
 
   return (
     <div className="containerEmployer">
-      <NavBar />
+      <Navbar />
       <div className="containerEmployer__read">
-        <div className="addAndSearch">
+        <div className="addAndSearchClient">
           <button className="btnAdd">
             <Link to="employeeCreate" className="btnAdd-link">
-              Agregar Cliente
+              Agregar Empleado
             </Link>
             <i className='bx bxs-user-plus'></i>
           </button>
@@ -93,20 +92,20 @@ const EmployeeRead = () => {
             onChange={handleInput}
             className="inputSearch"
             type="text"
-            placeholder="Buscar Client..."
+            placeholder="Buscar Empleado..."
           />
 
         <div className="employeeList">
           <ul>
-          {filteredClients.map((client) => (
-              <li key={client.id} className="employeeList__item">
-                {client.nombre} {client.apellido} 
+          {filteredEmployees.map((employee) => (
+              <li key={employee.id} className="employeeList__item">
+                {employee.nombre} {employee.apellido} 
                 <div className="btnInfos">
-                  <Link to={`/clientInfo/${client.id}`}>
+                  <Link to={`/employeeInfo/${employee.id}`}>
                     <i className='bx bxs-show'></i>
                   </Link>
                   {/* Botón para eliminar el empleado */}
-                  <i onClick={() => delete_cli(client.id)} className='bx bx-x'></i>
+                  <i onClick={() => deleteEmployee(employee.id, `${employee.nombre} ${employee.apellido}`)} className='bx bx-x'></i>
                 </div>
               </li>
             ))}

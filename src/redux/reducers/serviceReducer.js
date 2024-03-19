@@ -18,6 +18,8 @@ const serviceReducer = createReducer(initialState,(builder)=>{
       filterService: action.payload
     }
   })
+
+  
 })
 
 export default serviceReducer;
