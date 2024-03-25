@@ -1,7 +1,6 @@
 .navLogin{
   display: flex;
   justify-content: space-around;
-  /* margin-top: 1.2em; */
   height: 8vh;
   background-color: rgb(244, 239, 230);
   position: fixed;

@@ -50,7 +50,7 @@ const Payment = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Aquí puedes manejar la lógica para agregar los servicios al cliente seleccionado
-        // Por ejemplo, puedes redirigir a una página donde se agreguen los servicios
+        
       } else if (result.isDenied) {
         Swal.fire({
           title: "Acción cancelada",

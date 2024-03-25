@@ -86,8 +86,7 @@ const EmployeeRead = () => {
             </Link>
             <i className='bx bxs-user-plus'></i>
           </button>
-          {/* Aquí podrías agregar el filtro por búsqueda si lo deseas */}
-          {/* Asegúrate de manejar el estado del input de búsqueda y filtrar los empleados */}
+        
         </div>
 
         <input
@@ -107,7 +106,7 @@ const EmployeeRead = () => {
                   <Link to={`/clientInfo/${client.id}`}>
                     <i className='bx bxs-show'></i>
                   </Link>
-                  {/* Botón para eliminar el empleado */}
+                  
                   <i onClick={() => delete_cli(client.id, `${client.nombre} ${client.apellido}`)} className='bx bx-x'></i>
                 </div>
               </li>

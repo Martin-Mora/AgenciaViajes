@@ -30,7 +30,7 @@ const Navbar = () => {
       confirmButtonText: "Confirmar",
       denyButtonText: `No quiero`,
       customClass: {
-        title: 'my-swal-title' // Clase CSS para aplicar estilos al título
+        title: 'my-swal-title'
       }
     }).then((result) => {
       if (result.isConfirmed) {
@@ -38,7 +38,7 @@ const Navbar = () => {
           title: "Sesión cerrada!",
           icon:"success",
           customClass: {
-            title: 'my-swal-title' // Clase CSS para aplicar estilos al título
+            title: 'my-swal-title' 
           }
         });
         handleLogout();
@@ -47,7 +47,7 @@ const Navbar = () => {
           title: "Sesión activa",
           icon: "info",
           customClass: {
-            title: 'my-swal-title' // Clase CSS para aplicar estilos al título
+            title: 'my-swal-title' 
           }
         });
       }

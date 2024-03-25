@@ -8,7 +8,7 @@ import {
 } from "../../../redux/actions/serviceAction.js";
 import { Link } from "react-router-dom";
 import trash from "../../../Img/trash.png";
-import cartElement from "../../../Img/cartElement.svg"
+import cartElement from "../../../Img/cartElement.svg";
 import Swal from "sweetalert2";
 
 const Cart = () => {
@@ -16,18 +16,38 @@ const Cart = () => {
   const cartStore = useSelector((state) => state.cart.elements);
   const [itemCount, setItemCount] = useState(0);
   const [sumPrice, setSumPrice] = useState(0);
+  const [paymentMethod, setPaymentMethod] = useState("cash"); // Definir el método de pago por defecto
+  const [commissionRate, setCommissionRate] = useState(0); // Tasa de comisión por defecto
 
   useEffect(() => {
     setItemCount(cartStore.length);
-
     const totalPrice = cartStore.reduce((total, item) => total + item.costo, 0);
-    setSumPrice(totalPrice);
-    console.log(sumPrice);
-  }, [cartStore]);
+    setSumPrice(totalPrice + (totalPrice * commissionRate) / 100); // Agregar comisión al precio total
+  }, [cartStore, commissionRate]);
 
   const handleRemoveFromCart = (itemId) => {
     dispatch(removeFromCart(itemId));
     setItemCount(itemCount - 1);
+  };
+
+  // Función para manejar cambios en el método de pago
+  const handlePaymentMethodChange = (event) => {
+    const selectedMethod = event.target.value;
+    setPaymentMethod(selectedMethod);
+    // Actualizar tasa de comisión según el método de pago seleccionado
+    switch (selectedMethod) {
+      case "debit":
+        setCommissionRate(3);
+        break;
+      case "credit":
+        setCommissionRate(9);
+        break;
+      case "transfer":
+        setCommissionRate(2.45);
+        break;
+      default:
+        setCommissionRate(0);
+    }
   };
 
   const handleRemoveAll = () => {
@@ -37,25 +57,25 @@ const Cart = () => {
       confirmButtonText: "Confirmar",
       denyButtonText: `No quiero`,
       customClass: {
-        title: 'my-swal-title' // Clase CSS para aplicar estilos al título
-      }
+        title: "my-swal-title", 
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Servicios eliminados!",
-          icon:"success",
+          icon: "success",
           customClass: {
-            title: 'my-swal-title' // Clase CSS para aplicar estilos al título
-          }
+            title: "my-swal-title", 
+          },
         });
-        dispatch(empty_cart())
+        dispatch(empty_cart());
       } else if (result.isDenied) {
         Swal.fire({
           title: "acción cancelada",
           icon: "info",
           customClass: {
-            title: 'my-swal-title' // Clase CSS para aplicar estilos al título
-          }
+            title: "my-swal-title", 
+          },
         });
       }
     });
@@ -69,8 +89,10 @@ const Cart = () => {
         {itemCount === 0 ? (
           <div className="cartInfo">
             <img src={cartElement} alt="" />
-            <p className="cartInfo__description">Aún no tienes servicios en el carrito!</p>
-            </div>
+            <p className="cartInfo__description">
+              Aún no tienes servicios en el carrito!
+            </p>
+          </div>
         ) : (
           <>
             {cartStore.map((item) => (
@@ -95,28 +117,37 @@ const Cart = () => {
                 </div>
               </div>
             ))}
-
-            <Link to="/payment">
-              <button className="btnConfirm">Seguir con el pago</button>
-            </Link>
           </>
         )}
 
+            {itemCount === 0 ? null : (
         <div className="allPrice">
+          <div className="paymentMethod">
+            <select value={paymentMethod} onChange={handlePaymentMethodChange}>
+              <option value="cash">Efectivo</option>
+              <option value="debit">Tarjeta de Débito - 3%</option>
+              <option value="credit">Tarjeta de Crédito - 9%</option>
+              <option value="virtual">Monedero Virtual</option>
+              <option value="transfer">Transferencia - 2.45%</option>
+            </select>
+          </div>
+
           <div className="allPriceItems">
             <p>
               <span className="totalCartPrice">Pedido Total:</span> ${sumPrice}{" "}
             </p>
-            {itemCount === 0 ? null : (
               <img
                 src={trash}
                 alt=""
                 className="empty"
                 onClick={handleRemoveAll}
               />
-            )}
+            
+<Link to="/payment">
+              <button className="btnConfirm">Seguir con el pago</button>
+            </Link>
           </div>
-        </div>
+        </div>)}
       </div>
     </div>
   );

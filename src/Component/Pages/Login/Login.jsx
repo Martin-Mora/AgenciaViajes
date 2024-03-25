@@ -26,14 +26,14 @@ const Login = () => {
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
     if (password.current.value === "") {
-      passwordEmailErrorState("Email or password incorrect");
+      passwordEmailErrorState("Email o password incorrectos");
       hasError = true;
     } else {
       passwordEmailErrorState("");
     }
 
     if (!emailRegex.test(email.current.value)) {
-      passwordEmailErrorState("Email or password incorrect");
+      passwordEmailErrorState("Email o password incorrectos");
       hasError = true;
     } else {
       passwordEmailErrorState("");

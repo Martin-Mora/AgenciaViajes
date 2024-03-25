@@ -6,7 +6,6 @@
   flex-wrap: wrap;
   width: 80%;
   margin: auto;
-  /* border: 1px solid red; */
 }
 
 .addAndSearch{
@@ -42,7 +41,6 @@
 .containerService--info{
   display: flex;
   flex-direction: column;
-  /* gap: .5em; */
 }
 
 .button-wrapper {
@@ -55,7 +53,7 @@
 @media (min-width:768px) {
 
   .containerService__pack{
-    /* border: 1px solid blue; */
+  
     width: 100%;
     height: 100%;
     margin-left: 4em;

@@ -8,7 +8,7 @@ import Navbar from "../../../Navbar/Navbar";
 
 const EmployeeClientInfo = () => {
   const { id } = useParams();
-  const [client, setClient] = useState({direccion: ""});
+  const [client, setClient] = useState("");
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const EmployeeClientInfo = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"cliente":client}),
+        body: JSON.stringify({cliente:client}),
       
       });
       if (response.ok) {
@@ -69,6 +69,8 @@ const EmployeeClientInfo = () => {
       console.error('Error al editar el empleado:', error);
     }
   };
+
+  console.log({cliente:client});
 
   return (
     <div className="containerEmployer">

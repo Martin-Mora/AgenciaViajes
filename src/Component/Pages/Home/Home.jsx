@@ -1,23 +1,19 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "../Home/Home.css";
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
 import NavBar from "../../Navbar/Navbar.jsx";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis
-} from "recharts";
+
+
 
 const Home = () => {
   const user = useSelector((store) => store.users.user);
-  const [datos, setDatos] = useState([]);
+  const [totalSales, setTotalSales] = useState(0);
+  const [todaySales, setTodaySales] = useState(0);
+  const [employees, setEmployees] = useState([]);
+  const [totalCost, setTotalCost] = useState(0);
+  
 
   useEffect(() => {
     if (user) {
@@ -38,10 +34,54 @@ const Home = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("https://rickandmortyapi.com/api/character");
-        const datosJson = await response.json();
-        setDatos(datosJson.results);
+        const response = await fetch("http://149.50.138.150:9090/api/ventas");
+        const ventas = await response.json();
+        console.log(ventas);
         
+        
+        
+       // Obtener la fecha de hoy
+       const today = new Date();
+       // Convertir la fecha a formato de fecha corta (sin la hora)
+       const todayDateString = today.toISOString().split('T')[0];
+
+       // Filtrar las ventas que ocurrieron hoy
+       const todayVentas = ventas.filter(venta => {
+         // Obtener la fecha de venta del objeto y convertirla a formato de fecha corta
+         const ventaDate = new Date(venta.fechaVenta);
+         const ventaDateString = ventaDate.toISOString().split('T')[0];
+         // Comparar si la fecha de venta es igual a la fecha de hoy
+         return ventaDateString === todayDateString;
+       });
+
+       // Contar el número total de ventas y el número de ventas de hoy
+       const totalVentas = ventas.length;
+       const todayVentasCount = todayVentas.length;
+
+        // Obtener todos los empleados de las ventas
+        const allEmployees = ventas.map(venta => ({
+          nombre: venta.empleado.nombre,
+          apellido: venta.empleado.apellido
+        }));
+
+        // Eliminar duplicados de empleados
+        const uniqueEmployees = allEmployees.filter((employee, index, self) =>
+          index === self.findIndex(e => (
+            e.nombre === employee.nombre && e.apellido === employee.apellido
+          ))
+        );
+
+           // Calcular el costo total de las ventas
+           const totalCost = ventas.reduce((accumulator, venta) => {
+            return accumulator + venta.producto.costoPack;
+          }, 0);
+  
+
+       // Actualizar el estado de totalSales y todaySales
+       setTotalSales(totalVentas);
+       setTodaySales(todayVentasCount);
+       setEmployees(uniqueEmployees);
+       setTotalCost(totalCost);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -49,81 +89,42 @@ const Home = () => {
     fetchData();
   }, []);
 
-  console.log(datos);
 
-  // Calcular porcentaje de personajes por género
-  const calcularPorcentajes = () => {
-    const genderCount = {
-      male: 0,
-      female: 0,
-      unknown: 0
-    };
-
-    datos.forEach((personaje) => {
-      if (personaje.gender === "Male") {
-        genderCount.male++;
-      } else if (personaje.gender === "Female") {
-        genderCount.female++;
-      } else {
-        genderCount.unknown++;
-      }
-    });
-
-    const total = datos.length;
-    const porcentajeMale = (genderCount.male / total) * 100 ;
-    const porcentajeFemale = (genderCount.female / total) * 100;
-    const porcentajeUnknown = (genderCount.unknown / total) * 100;
-
-    return {
-      male: porcentajeMale,
-      female: porcentajeFemale,
-      unknown: porcentajeUnknown
-    };
-  };
-
-  const porcentajes = calcularPorcentajes();
 
   return (
     <>
-    <NavBar />
-    <h2>Porcentajes de Mujeres y hombres en Rick and Morty:</h2>
-    <ResponsiveContainer width="50%" aspect={2}>
-      <BarChart className="bar" data={[porcentajes]} aspect={2}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="gender" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="male" fill="#6b48ff" />
-        <Bar dataKey="female" fill="#1ee3cf" />
-        <Bar dataKey="unknown" fill="#c9ab57" />
-      </BarChart>
-    </ResponsiveContainer>
-  </>
+      <NavBar />
 
-    // <>
-    //   {user.nameUser === "PruebaAdmin" ? (
-    //     alert("eres el admin! (inserte el otro componente)")
-    //   ) : (
-    //     <>
-    //       <NavBar />
-    //       <h2>Porcentajes de Mujeres y hombres en Rick and Morty:</h2>
-    //       <ResponsiveContainer width="50%" aspect={2}>
-    //         <BarChart className="bar" data={[porcentajes]} aspect={2}>
-    //           <CartesianGrid strokeDasharray="3 3" />
-    //           <XAxis dataKey="gender" />
-    //           <YAxis />
-    //           <Tooltip />
-    //           <Legend />
-    //           <Bar dataKey="male" fill="#6b48ff" />
-    //           <Bar dataKey="female" fill="#1ee3cf" />
-    //           <Bar dataKey="unknown" fill="#c9ab57" />
-    //         </BarChart>
-    //       </ResponsiveContainer>
-    //     </>
-    //   )}
-    // </>
+      <div className="container-home">
+        <section className="total-sales">
+      <h3>Ventas totales: {totalSales} </h3>
+
+        </section>
+
+        <section className="day-sales">
+      <h3>Ventas del dia:{todaySales} </h3>
+
+        </section>
+
+        <section className="day-sales">
+      <h3>Empleados: </h3>
+      <ul>
+            {employees.map((employee, index) => (
+              <li key={index}>{employee.nombre} {employee.apellido}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="day-sales">
+          <h3>Costo total de ventas: ${totalCost}</h3>
+        </section>
+      </div>
+
+     
+
+    </>
   );
-      }
+};
 
 export default Home;
+

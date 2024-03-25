@@ -20,35 +20,7 @@ builder
       filterClient: action.payload, 
     };
   })
-  // .addCase(get_employee.fulfilled, (store, action) => {
-  //   console.log("Get Employee fulfilled. Store:", store);
-  //   return {
-  //     ...store,
-  //     employee: action.payload,
-  //   };
-  // })
-  // .addCase(resetEmployee.fulfilled, (store, action) => {
-  //   console.log("Reset Employee fulfilled. Store:", store);
-  //   return {
-  //     ...store,
-  //     employee: action.payload,
-  //   };
-  // })
-  // .addCase(resetSearch, (stateActual) => {
-  //   console.log("Reset Search. Store:", stateActual);
-  //   return {
-  //     ...stateActual,
-  //     input: "",
-  //   };
-  // })
-  // .addCase(employee_input, (store, action) => {
-  //   console.log("Employee Input. Store:", store);
-  //   return {
-  //     ...store,
-  //     selectedValue: action.payload.selectedValue,
-  //     input: action.payload.input,
-  //   };
-  // })
+
   .addCase(delete_client.fulfilled, (state, action) => {
     // Actualiza allEmployee eliminando el empleado con el id proporcionado
     state.allClient = state.allClient.filter(client => client.id !== action.payload.id);

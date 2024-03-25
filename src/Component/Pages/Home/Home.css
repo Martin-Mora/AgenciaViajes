@@ -1,19 +1,21 @@
-h2{
-    
-    text-align: center;
-    position: absolute;
-    top:5em;
-    left: 25em;
+.container-home{
+    height: 100vh;
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+
 }
 
+.total-sales{
+    border: 1px solid blue;
+    height: 300px;
+    width: 300px;
+    margin-top: 10em;
+}
 
-
-.bar{
-    /* width: 200px;
-    height: 200px; */
-    margin:0 auto;
-    display: flex;
-    position: relative;
-    left: 25em;
-    top: 13em;
-  }
+.day-sales{
+    border: 1px solid green;
+    height: 300px;
+    width: 300px;
+    margin-top: 10em;
+}

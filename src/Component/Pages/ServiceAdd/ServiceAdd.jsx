@@ -61,7 +61,7 @@ const ServiceAdd = () => {
           title: "Servicio Agregado!",
            icon:"success",
            customClass: {
-            title: 'my-swal-title' // Clase CSS para aplicar estilos al título
+            title: 'my-swal-title' 
           }
         });
         // navigate("/employeeRead");

@@ -7,11 +7,11 @@ const LayoutMain = () => {
     const { pathname } = useLocation();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // Aquí podrías tener lógica para verificar si hay un usuario conectado
+   
     useEffect(() => {
-        // Ejemplo de lógica simple: comprobar si hay un usuario en el localStorage
+       
         const user = localStorage.getItem("user");
-        setIsLoggedIn(!!user); // Establece isLoggedIn como true si hay un usuario en localStorage
+        setIsLoggedIn(!!user); 
     }, []);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const LayoutMain = () => {
     return (
         <div className='app-main'>
             <NavBarLogin />
-            {isLoggedIn && <NavBar />} {/* Muestra NavBar solo si el usuario está conectado */}
+            {isLoggedIn && <NavBar />} 
             <Outlet />
         </div>
     );
